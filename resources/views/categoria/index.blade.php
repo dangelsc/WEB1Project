@@ -3,7 +3,11 @@
 @section('titulo','Categoria')
 @section('subtitulo','Lista')
 @section('content')
-
+<style>
+    .w-5, .h-5{
+        width: 30px;
+    }
+</style>
     <div class="row">
         <div class="pull-right">
             <!--<a href="/categoria/create"></a>-->
@@ -18,7 +22,7 @@
         <p>{{$msg}}</p>
     </div>
     @endif
-    <?php $i=0;?>
+    
     <table class="table">
         <tr>
             <th>Nº</th>
@@ -37,7 +41,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" title="Borra" >
-                        <i class="fas fa-trashfa-lg text-danger"></i>
+                        <i class="fas fa-trash fa-lg text-danger"></i>
                     </button>
                 </form>
             </td>

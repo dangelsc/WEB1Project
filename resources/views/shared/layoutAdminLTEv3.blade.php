@@ -13,6 +13,11 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
+<style>
+    .w-5, .h-5{
+        width: 30px;
+    }
+</style>
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -271,8 +276,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Blank Page</li>
+              <li class="breadcrumb-item"><a href="#">@yield('titulo')</a></li>
+              <li class="breadcrumb-item active">@yield('subtitulo')</li>
             </ol>
           </div>
         </div>

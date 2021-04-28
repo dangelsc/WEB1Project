@@ -20,7 +20,7 @@ class CategoriaController extends Controller
             ->paginate($numero_por_paginas);
         //return view('categoria.index',['lista'=>$lista]);
         return view('categoria.index',compact('lista'))
-            ->with((request()->input('page',1)-1)*$numero_por_paginas);
+            ->with('i',(request()->input('page',1)-1)*$numero_por_paginas);
     }
     //crear
         //->create  formulario vacio
@@ -40,8 +40,7 @@ class CategoriaController extends Controller
         //-> edit  formulario con datos
     public function edit(/*categorial $categorial*/  $id){
         $categorial=categorial::find($id);
-        //dd($categorial);
-        
+        //dd($categorial);        
         return view('categoria.edit',compact('categorial'));
     }
         //-> update almacena en db
