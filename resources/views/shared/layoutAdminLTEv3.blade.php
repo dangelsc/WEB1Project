@@ -154,6 +154,27 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      @guest
+      @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+      @else
+      <li class="nav-item">
+        <a onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" 
+        class="nav-link"  href="{{ route('logout') }}" role="button">
+          <i class="fas fa-user"></i>
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+        </div>
+      </li>
+      @endguest
+
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -174,7 +195,27 @@
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+                            
+                        @endguest
+
+          
         </div>
       </div>
 
@@ -243,7 +284,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
+            <a href="{{route('venta.index')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Venta

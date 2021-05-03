@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +16,21 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/inicio', function () {
     return print("HOla, iniciando el proyecto");
-});
+})->middleware('auth');
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
-Route::resource('categoria',CategoriaController::class);
+Route::resource('categoria',CategoriaController::class)
+    ->middleware('auth');
+
+Route::resource('venta',VentaController::class)
+    ->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\categorial;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\Auth;
 
 class CategoriaController extends Controller
 {
@@ -13,6 +14,8 @@ class CategoriaController extends Controller
     //listar
         // index mosatrar datos de la db
     public function index(){
+
+        //dd(Auth::user()->id);
         //paginacion
         $numero_por_paginas=2;
         $lista=categorial::where('estado',1)
@@ -63,3 +66,10 @@ class CategoriaController extends Controller
     }
     
 }
+
+/***
+ * >composer require laravel/ui
+ * >php artisan ui boostrap --auth
+ * >php artisan migrate
+*/
+
