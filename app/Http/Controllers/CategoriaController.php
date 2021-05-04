@@ -9,7 +9,8 @@ use Illuminate\Support\facades\Auth;
 class CategoriaController extends Controller
 {
     private  $validar = [
-        'nombre' => 'required'
+        'nombre' => 'required',
+        'edad'=>'required'
     ];
     //listar
         // index mosatrar datos de la db
@@ -33,7 +34,7 @@ class CategoriaController extends Controller
         //->store   almacena en db
         //Post -> url= dominio.com/categoria/store
     public function store(Request $req){
-        $req->validate($this->validar);
+        $req->validate($this->validar,['required'=>'Es necesario :attribute']);
         categorial::create($req->all());
         //$this->index();
         return redirect()->route('categoria.index')

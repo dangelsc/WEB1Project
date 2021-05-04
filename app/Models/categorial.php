@@ -9,7 +9,7 @@ class categorial extends Model
 {
     use HasFactory;
     protected $table = 'categoria';
-    protected $fillable = ['nombre','estado','id_categoria'];
+    protected $fillable = ['nombre','edad','estado','id_categoria'];
     protected $primaryKey = 'id_categoria';
 
 }

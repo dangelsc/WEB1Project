@@ -9,7 +9,7 @@ class Venta extends Model
 {
     use HasFactory;
     protected $table = 'venta';
-    protected $fillable = ['id_venta','fecha','estado'];
+    protected $fillable = ['id_venta','nombre','fecha','estado'];
     protected $primaryKey = 'id_venta';
     public function detalles(){
         return $this->hasMany(Ventadetalle::class,'id_venta');

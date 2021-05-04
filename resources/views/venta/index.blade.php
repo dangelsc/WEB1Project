@@ -1,6 +1,6 @@
 @extends('shared.layoutAdminLTEv3')
 
-@section('titulo','Categoria')
+@section('titulo','Ventas')
 @section('subtitulo','Lista')
 @section('content')
 <style>
@@ -45,6 +45,9 @@
                     <button type="submit" title="Borra" >
                         <i class="fas fa-trash fa-lg text-danger"></i>
                     </button>
+                    <a href="/venta/print/{{$categoria->id_venta}}">
+                        <i class="fas fa-print fa-lg"></i>
+                    </a>
                 </form>
             </td>
         </tr>

@@ -44,10 +44,6 @@
         <button type="button" ng-click="agregar()">agregar</button>
     </div>
 
-
-
-         
-
         <table>
             
             <tr ng-repeat="prod in carrito">
@@ -55,6 +51,11 @@
                 <td>@{{prod.precio}}</td>
                 <td>@{{prod.cant}}</td>
                 <td>@{{prod.precio*prod.cant}}</td>
+                <td>
+                    <button type="button" ng-click="borrar(prod)">
+                        <i class = "fas fa-trash"></i> 
+                    </button>
+                </td>
             </tr>
             <tr>
                 <td rowspan="3">@{{total}}</td>
@@ -76,17 +77,36 @@
 <script>
 angular.module('tienda',[])
 .controller('venta',function($scope){
-    $scope.carrito=[];
+    $scope.carrito = [];
     $scope.total=0;
     $scope.detalle="";
     $scope.agregar=function(){
         //detalle venta
-        $scope.carrito.push({
-            id_producto:$scope.producto.id_producto,
-            producto:$scope.producto,
-            cant:$scope.cant,
-            precio:$scope.producto.precio
-        });
+        console.log("carrito",$scope.carrito);
+        console.log("buscar",$scope.producto.id_producto)
+        let prod = $scope.carrito.find(
+            (p)=>{return p.id_producto===$scope.producto.id_producto}
+        );
+        if(prod){
+            prod.cant+=$scope.cant;
+            //$scope.carrito[index].cant=99;
+            console.log("carrito",$scope.carrito);
+            console.log("producto duplicado",prod.producto.nombre);
+        }else
+        {
+            $scope.carrito.push({
+                id_producto:$scope.producto.id_producto,
+                producto:$scope.producto,
+                cant:$scope.cant,
+                precio:$scope.producto.precio
+            });
+        }
+        actualizar();
+    }
+    $scope.borrar=function(prod){
+
+        let index=$scope.carrito.indexOf(prod);
+        $scope.carrito.splice(index,1);
         actualizar();
     }
     function actualizar(){

@@ -26,7 +26,7 @@ Route::resource('categoria',CategoriaController::class)
 
 Route::resource('venta',VentaController::class)
     ->middleware('auth');
-
+Route::get('venta/print/{id}',[VentaController::class,'print']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

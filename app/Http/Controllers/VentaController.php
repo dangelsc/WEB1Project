@@ -17,7 +17,6 @@ class VentaController extends Controller
         
     ];
     public function index(){
-        
         $numero_por_paginas=2;
         $lista= Venta::where('estado',1)
             ->latest()
@@ -32,9 +31,9 @@ class VentaController extends Controller
     }
     public function store(Request $req){
         $req->validate($this->validar);
+        $venta=null;
         try{
             DB::beginTransaction();
-
             $venta=Venta::create($req->all())->id_venta;
             //dd($venta);
             $det=json_decode($req->detalle);
@@ -47,14 +46,25 @@ class VentaController extends Controller
             }
             DB::commit();
         }catch(ModelNotFoundException $e){
+            
             DB::rollBack();
             return redirect()->route('venta.index')
             ->with('Fallo','No creado Venta, intente mas tarde');
         }
 
         //Ventadetalle::
-        return redirect()->route('venta.index')
+        /*return redirect()->route('venta.index')
+            ->with('success','Venta creado');*/
+        return redirect('venta/print/'.$venta)
             ->with('success','Venta creado');
+
+    }
+    public function print($id){
+        $Venta=Venta::find($id);
+        /*select * from  venta v inner join ventadetalle vd
+            on v.id_venta=vd.id_venta
+            inner join producto p on p.id_producto=vd.id_producto*/
+        return view('venta.print',compact('Venta'));
     }
     public function edit(/*Venta $Venta*/  $id){
         $Venta=Venta::find($id);
@@ -74,5 +84,4 @@ class VentaController extends Controller
         return redirect()->route('venta.index')
         ->with('success','Venta eliminado');
     }
-    
 }

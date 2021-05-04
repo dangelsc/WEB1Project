@@ -23,7 +23,14 @@
         <div class="row">
             <div class="col-xs12">
                 <strong>Nombre</strong>
-                <input type="text" name="nombre" class="form-control">
+                <input type="text" value="{{old('nombre')}}" name="nombre" class="form-control">
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-xs12">
+                <strong>edad</strong>
+                <input type="text" name="edad" value="{{old('edad')}}" class="form-control">
             </div>
             
         </div>
